@@ -2,12 +2,13 @@ import Vue from 'vue';
 import Router from "vue-router";
 
 import App from './App.vue';
-import HomePage from "./components/HomePage.vue";
-import SearchPage from "./components/SearchPage.vue";
-import MoviePage from "./components/MoviePage.vue";
-import FavoritesPage from "./components/FavoritesPage.vue";
+import HomePage from "./pages/HomePage/HomePage.vue";
+import SearchPage from "./pages/SearchPage/SearchPage.vue";
+import MoviePage from "./pages/MoviePage/MoviePage.vue";
+import FavoritesPage from "./pages/FavoritesPage/FavoritesPage.vue";
 
 Vue.config.productionTip = false;
+
 Vue.use(Router);
 
 const routes = [
@@ -16,7 +17,7 @@ const routes = [
     component: HomePage
   },
   {
-    path: "/search/:query",
+    path: "/search/:query/:page",
     name: "search",
     component: SearchPage
   },

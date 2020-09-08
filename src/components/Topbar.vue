@@ -1,11 +1,16 @@
 <template>
   <header class="topbar">
-    <button class="sidebar-button">
-      <i></i>
+    <button class="sidebar-button" @click="toggleSidebar">
+      <span class="fa fa-bars"></span>
     </button>
-    <div class="input-container">
-      <i></i>
-      <input type="text" placeholder="Busque aqui seus filmes" class="search-input" />
+    <div class="search-input-container">
+      <i class="search-input-icon"></i>
+      <input
+        type="text"
+        placeholder="Busque aqui seus filmes"
+        @keyup="changeSearchQuery"
+        class="search-input"
+      />
     </div>
   </header>
 </template>
@@ -13,31 +18,65 @@
 <script>
 export default {
   name: "Topbar",
+  methods: {
+    changeSearchQuery: function (event) {
+      this.$router.push(`/search/${event.target.value}/1`);
+    },
+    toggleSidebar: function () {
+      const sdbar = document.getElementsByClassName("sidebar")[0];
+
+      if (!sdbar.style.transform) {
+        sdbar.style.transform = "translateX(0)";
+      } else {
+        sdbar.style.transform = "";
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .topbar {
-  position: absolute;
-  height: 75px;
-  width: 100%;
+  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 2;
-  background-color: transparent;
+  width: 100%;
+  z-index: 3;
+  height: 60px;
+  position: absolute;
   box-sizing: border-box;
-}
-
-.input-container {
-  display: flex;
-  height: 80%;
-  background-color: white;
-  border-radius: 16px;
+  padding: 0 20px;
 }
 
 .search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.search-input-container {
+  width: 250px;
+  height: 60%;
+  border-radius: 20px;
+  border: none;
+  outline: none;
   color: black;
+  padding: 0 20px;
+  margin: 0 30px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.search-input-icon {
+  margin: 0 5px 0 0;
+  font-size: 1.2em;
+}
+
+.sidebar-button {
+  background-color: transparent;
+  color: white;
   border: none;
   outline: none;
 }
