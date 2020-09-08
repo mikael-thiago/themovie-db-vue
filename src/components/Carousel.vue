@@ -76,7 +76,7 @@ export default {
 }
 
 .carousel-title {
-  font-size: 1.3em;
+  font-size: 2rem;
   font-weight: bold;
   margin: 10px 0;
 }
@@ -85,7 +85,7 @@ export default {
   margin: 10px 0;
   width: 100%;
   height: min-content;
-  min-height: 2.5em;
+  min-height: 2.5rem;
   position: relative;
   display: flex;
   flex-basis: auto;
@@ -98,13 +98,13 @@ export default {
   background-color: transparent;
   border: none;
   outline: none;
-  font-size: 2.5em;
+  font-size: 2.5rem;
   transition: 0.2s;
   opacity: 0.7;
 }
 
 .carousel-controller:hover {
-  font-size: 2.7em;
+  font-size: 2.7rem;
   opacity: 1;
   color: white;
 }

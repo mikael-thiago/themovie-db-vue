@@ -99,7 +99,7 @@ export default {
   justify-content: center;
   align-items: center;
   transition: 0.1s;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   color: white;
   z-index: 2;
   padding: 0;
@@ -118,6 +118,6 @@ export default {
   height: 55px;
   right: 7.5px;
   bottom: 22.5px;
-  font-size: 1.8em;
+  font-size: 1.8rem;
 }
 </style>

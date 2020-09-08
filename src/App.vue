@@ -34,19 +34,19 @@ body {
   padding: 0;
   font-size: 12px;
   overflow: hidden;
-  background-color: #111111;
+  color: #aaaaaa;
+  background-color: #010101;
 }
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #aaaaaa;
-  background-color: #111111;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   overflow-y: scroll;
   background-color: inherit;
+  color: inherit;
 }
 </style>

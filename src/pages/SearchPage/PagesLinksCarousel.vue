@@ -68,7 +68,7 @@ export default {
 }
 
 .search-pages-links a {
-  font-size: 1em;
+  font-size: 1rem;
   flex-shrink: 0;
   flex-grow: 0;
   color: white;
@@ -84,7 +84,7 @@ export default {
 .search-pages-links-controller {
   border: none;
   outline: none;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   color: white;
   background-color: transparent;
 }

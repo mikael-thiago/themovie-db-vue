@@ -1,6 +1,6 @@
 <template>
   <div class="home-root">
-    <Section>
+    <Section title="Filmes mais populares">
       <MovieCard v-for="(movie, key) in movies" :key="key" :movie="movie" />
     </Section>
   </div>

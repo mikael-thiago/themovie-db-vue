@@ -104,7 +104,7 @@ export default {
 
 .recomendation-movie-rating-icon {
   color: yellow;
-  font-size: 1em;
+  font-size: 1rem;
   margin: 0 5px;
 }
 
@@ -113,7 +113,7 @@ export default {
 }
 
 .recommendation-item-title {
-  font-size: 1.5em;
+  font-size: 1.8rem;
   font-weight: 600;
   color: white;
 }

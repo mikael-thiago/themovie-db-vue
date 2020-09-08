@@ -255,7 +255,7 @@ export default {
 }
 
 .movie-title {
-  font-size: 6em;
+  font-size: 6rem;
   text-align: left;
   font-weight: bold;
   overflow: visible;
@@ -263,18 +263,18 @@ export default {
 }
 
 .movie-tagline {
-  font-size: 1.1em;
+  font-size: 1.1rem;
 }
 
 .movie-details {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   margin: 10px 0;
   display: flex;
   align-items: center;
 }
 
 .movie-description {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   margin: 10px 0;
 }
 
@@ -287,7 +287,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   box-shadow: 2px 2px 3px black;
   margin-top: 20px;
 }
@@ -300,12 +300,12 @@ export default {
 
 .movie-rating-icon {
   color: yellow;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   margin: 0 3px;
 }
 
 .movie-rating-vote-count {
-  font-size: 0.65em;
+  font-size: 0.65rem;
   color: #dddddd;
 }
 
@@ -320,7 +320,7 @@ export default {
   position: absolute;
   bottom: 30px;
   right: 80px;
-  font-size: 3em;
+  font-size: 3rem;
 }
 
 .favorited {

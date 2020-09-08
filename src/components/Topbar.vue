@@ -66,7 +66,7 @@ export default {
 
 .search-input-icon {
   margin: 0 5px 0 0;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .sidebar-button {

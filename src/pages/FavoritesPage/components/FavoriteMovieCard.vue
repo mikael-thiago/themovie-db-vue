@@ -64,7 +64,7 @@ export default {
   display: none;
   justify-content: center;
   align-items: center;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   color: white;
   z-index: 2;
   background-color: transparent;
@@ -74,6 +74,6 @@ export default {
 }
 
 .unfavorite-button:hover {
-  font-size: 2.3em;
+  font-size: 2.3rem;
 }
 </style>

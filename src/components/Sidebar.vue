@@ -49,7 +49,7 @@ export default {
   width: 10vw;
   height: 100vh;
   max-width: 60px;
-  background-color: rgba(17, 17, 17, 0);
+  background-color: rgba(0, 0, 0, 0);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,7 +58,7 @@ export default {
 }
 
 .sidebar:hover {
-  background-color: rgba(17, 17, 17, 1);
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .deactivated {

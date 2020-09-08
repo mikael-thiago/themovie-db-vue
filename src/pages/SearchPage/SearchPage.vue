@@ -1,6 +1,8 @@
 <template>
   <div class="search-root">
-    <Section :title="`Resultados para ${query} - Página ${page}`">
+    <Section
+      :title="searchResult.result.length? `Resultados para ${query} - Página ${page}`: 'Não foram encontrados resultados'"
+    >
       <MovieCard v-for="(movie, key) in searchResult.result" :key="key" :movie="movie" />
     </Section>
 

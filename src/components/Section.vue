@@ -30,7 +30,7 @@ section {
 
 section > h1 {
   color: white;
-  font-size: 3rem;
+  font-size: 2.3rem;
   font-weight: bold;
   text-align: start;
   width: 100%;
