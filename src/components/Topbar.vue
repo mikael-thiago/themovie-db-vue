@@ -1,8 +1,9 @@
 <template>
   <header class="topbar">
-    <button class="sidebar-button" @click="toggleSidebar">
-      <span class="fa fa-bars"></span>
+    <button class="sidebar-button" @click="activateSidebar">
+      <i class="fa fa-bars"></i>
     </button>
+
     <div class="search-input-container">
       <i class="search-input-icon"></i>
       <input
@@ -22,14 +23,8 @@ export default {
     changeSearchQuery: function (event) {
       this.$router.push(`/search/${event.target.value}/1`);
     },
-    toggleSidebar: function () {
-      const sdbar = document.getElementsByClassName("sidebar")[0];
-
-      if (!sdbar.style.transform) {
-        sdbar.style.transform = "translateX(0)";
-      } else {
-        sdbar.style.transform = "";
-      }
+    activateSidebar: function () {
+      this.$store.commit("activateSidebar");
     },
   },
 };

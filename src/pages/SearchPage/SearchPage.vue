@@ -1,18 +1,22 @@
 <template>
   <div class="search-root">
-    <section>
-      <h1 class="section-title">{{"Resultados para "+query+" - Página "+page}}</h1>
-      <div class="section-content">
-        <MovieCard v-for="(movie, key) in searchResult.result" :key="key" :movie="movie" />
-      </div>
-    </section>
-    <PagesLinksCarousel :query="query" :numberOfPages="searchResult.pages" />
+    <Section :title="`Resultados para ${query} - Página ${page}`">
+      <MovieCard v-for="(movie, key) in searchResult.result" :key="key" :movie="movie" />
+    </Section>
+
+    <PagesLinksCarousel
+      v-if="searchResult.pages > 1"
+      :query="query"
+      :numberOfPages="searchResult.pages"
+    />
   </div>
 </template>
 
 <script>
 import { getSearchResult } from "../../api-calls.js";
-import MovieCard from "../../components/MovieCard.vue";
+
+import Section from "@/components/Section.vue";
+import MovieCard from "@/components/MovieCard.vue";
 import PagesLinksCarousel from "./PagesLinksCarousel.vue";
 
 export default {
@@ -38,8 +42,6 @@ export default {
       this.page = this.$route.params.page;
 
       getSearchResult(this.query, this.page).then((searchResponse) => {
-        console.log(searchResponse.results);
-
         this.searchResult = {
           result: searchResponse.results,
           pages: searchResponse.total_pages,
@@ -50,6 +52,7 @@ export default {
   components: {
     MovieCard,
     PagesLinksCarousel,
+    Section,
   },
 };
 </script>
@@ -61,31 +64,5 @@ export default {
   align-items: flex-start;
   box-sizing: border-box;
   padding-top: 60px;
-}
-
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 95%;
-  margin-bottom: 25px;
-}
-
-.section-title {
-  color: white;
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: start;
-  width: 100%;
-  margin-bottom: 25px;
-}
-
-.section-content {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  column-gap: 15px;
-  row-gap: 15px;
 }
 </style>

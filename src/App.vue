@@ -2,7 +2,9 @@
   <div id="app">
     <Topbar />
     <Sidebar />
-    <router-view></router-view>
+    <div @click="deactivateSidebar" style="height: 100%;">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -15,6 +17,11 @@ export default {
   components: {
     Topbar,
     Sidebar,
+  },
+  methods: {
+    deactivateSidebar() {
+      if (this.$store.state.sidebar) this.$store.commit("deactivateSidebar");
+    },
   },
 };
 </script>
@@ -34,7 +41,8 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #aaaaaa;
+  background-color: #111111;
   width: 100%;
   height: 100%;
   box-sizing: border-box;

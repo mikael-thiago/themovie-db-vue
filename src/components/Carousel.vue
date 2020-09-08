@@ -35,7 +35,9 @@ export default {
     };
   },
   props: {
-    title: String,
+    title: {
+      type: String,
+    },
   },
   mounted() {
     const item = this.$refs["content"].children.item(0);

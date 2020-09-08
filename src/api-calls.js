@@ -29,18 +29,12 @@ const getMovie = async (movie_id) => {
     return movieResult.data;
 }
 
-/*
-const getSimilarMovies = async (movie_id) => {
-    const URL = BASE_URL + "movie/"+movie_id+"?api_key="+API_KEY+"&language=pt-BR"
-}*/
-
 const getFavoritedMovies = async () => {
     let favoritedMovies = [];
 
     for (var i = 0; i < localStorage.length; i++) {
 
         let key = localStorage.key(i);
-
 
         if (localStorage.getItem(key) === "true") {
             var favoritedMovie;
@@ -56,12 +50,10 @@ const getFavoritedMovies = async () => {
 
 const favoriteMovie = (movie_id) => {
     localStorage.setItem(movie_id, true);
-
 }
 
 const unfavoriteMovie = (movie_id) => {
-
-    localStorage.setItem(movie_id, false);
+    localStorage.removeItem(movie_id);
 }
 
 const isFavorite = (movie_id) => {

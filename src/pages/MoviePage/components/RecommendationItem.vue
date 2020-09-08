@@ -2,7 +2,7 @@
   <div
     :style="{cursor: 'pointer'}"
     @mouseenter="brightOnHover"
-    @mouseleave="unbrightOnHover"
+    @mouseleave="unbrightOnUnhover"
     class="recommendation-item"
     @click="redirectToMovie"
   >
@@ -41,24 +41,28 @@ export default {
     },
   },
   computed: {
-    imageUrl: function () {
-      return getImageBaseUrl() + "w780" + this.recommendation.backdrop_path;
+    imageUrl() {
+      if (this.recommendation.backdrop_path)
+        return getImageBaseUrl() + "w780" + this.recommendation.backdrop_path;
+      return "";
     },
-    year: function () {
-      return this.recommendation.release_date
-        ? this.recommendation.release_date.split("-")[0]
-        : "";
+    year() {
+      if (this.recommendation.release_date)
+        return this.recommendation.release_date.split("-")[0];
+
+      return "";
     },
   },
   methods: {
-    redirectToMovie: function () {
+    redirectToMovie() {
       document.getElementsByClassName("movie-wrapper")[0].scrollTo(0, 0);
+
       this.$router.push(`/movie/${this.recommendation.id}`);
     },
-    brightOnHover: function () {
+    brightOnHover() {
       this.$refs["background"].style.filter = "brightness(0.7)";
     },
-    unbrightOnHover: function () {
+    unbrightOnUnhover() {
       this.$refs["background"].style.filter = "";
     },
   },

@@ -20,19 +20,14 @@ export default {
     cast: {
       type: Object,
       required: true,
-      default() {
-        return {
-          name: "",
-        };
-      },
     },
   },
   computed: {
-    imageUrl: function () {
-      return this.cast.profile_path !== null &&
-        this.cast.profile_path !== undefined
-        ? getImageBaseUrl() + "/w185" + this.cast.profile_path
-        : "";
+    imageUrl() {
+      if (this.cast.profile_path)
+        return getImageBaseUrl() + "/w185" + this.cast.profile_path;
+
+      return "";
     },
   },
 };

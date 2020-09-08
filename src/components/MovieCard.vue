@@ -67,10 +67,11 @@ export default {
 
 <style>
 .movie-card {
-  width: 200px;
-  height: 300px;
+  width: 220px;
+  height: 320px;
   cursor: pointer;
   position: relative;
+  margin: 6px;
 }
 
 .movie-content {
@@ -81,6 +82,7 @@ export default {
   object-fit: cover;
   transition: 200ms ease all;
   background-color: #333333;
+  border-radius: 3px;
 }
 
 .favorite-movie-button {

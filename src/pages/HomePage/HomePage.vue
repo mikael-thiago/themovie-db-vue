@@ -1,19 +1,22 @@
 <template>
   <div class="home-root">
-    <section>
+    <Section>
       <MovieCard v-for="(movie, key) in movies" :key="key" :movie="movie" />
-    </section>
+    </Section>
   </div>
 </template>
 
 <script>
-import MovieCard from "../../components/MovieCard.vue";
-import { getMostPopularMovies } from "../../api-calls.js";
+import MovieCard from "@/components/MovieCard.vue";
+import Section from "@/components/Section.vue";
+
+import { getMostPopularMovies } from "@/api-calls.js";
 
 export default {
   name: "HomePage",
   components: {
     MovieCard,
+    Section,
   },
   data() {
     return {
@@ -37,13 +40,5 @@ export default {
   justify-content: center;
   width: 100%;
   height: min-content;
-}
-
-section {
-  width: 95%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  column-gap: 15px;
-  row-gap: 15px;
 }
 </style>

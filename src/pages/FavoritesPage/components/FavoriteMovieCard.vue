@@ -13,19 +13,21 @@
 </template>
 
 <script>
-import { getImageBaseUrl } from "../../api-config.js";
-import { unfavoriteMovie } from "../../api-calls.js";
+import { getImageBaseUrl } from "@/api-config.js";
+import { unfavoriteMovie } from "@/api-calls.js";
 
 export default {
   name: "FavoriteMovieCard",
   props: {
-    movie: {},
+    movie: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
     posterUrl() {
       if (this.movie.poster_path)
         return getImageBaseUrl() + "w500/" + this.movie.poster_path;
-
       return "";
     },
   },
@@ -72,6 +74,6 @@ export default {
 }
 
 .unfavorite-button:hover {
-  font-size: 2em;
+  font-size: 2.3em;
 }
 </style>

@@ -1,19 +1,21 @@
 <template>
   <div class="favorites-root">
-    <section>
+    <Section>
       <FavoriteMovieCard
         v-for="(movie, key) in movies"
         :key="key"
         :movie="movie"
         @unfavoritedMovie="handleUnfavoriteMovie"
       />
-    </section>
+    </Section>
   </div>
 </template>
 
 <script>
-import { getFavoritedMovies } from "../../api-calls.js";
-import FavoriteMovieCard from "./FavoriteMovieCard.vue";
+import { getFavoritedMovies } from "@/api-calls.js";
+
+import Section from "@/components/Section.vue";
+import FavoriteMovieCard from "./components/FavoriteMovieCard.vue";
 
 export default {
   name: "FavoritesPage",
@@ -24,6 +26,7 @@ export default {
   },
   components: {
     FavoriteMovieCard,
+    Section,
   },
   created() {
     getFavoritedMovies().then((movies) => {
@@ -49,13 +52,5 @@ export default {
   height: 100%;
   box-sizing: border-box;
   padding-top: 60px;
-}
-
-section {
-  width: 95%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  column-gap: 15px;
-  row-gap: 15px;
 }
 </style>

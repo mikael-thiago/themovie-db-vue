@@ -1,17 +1,28 @@
 <template>
-  <div class="sidebar">
+  <div :class="{'sidebar': true, 'deactivated': !$store.state.sidebar}">
     <div class="sidebar-header">
-      <button class="sidebar-button" @click="toggleSidebar">
-        <span class="fa fa-bars"></span>
+      <button class="sidebar-button" @click="deactivateSidebar">
+        <i class="fa fa-bars"></i>
       </button>
     </div>
     <div class="sidebar-body">
       <nav class="sidebar-nav">
         <ul>
-          <router-link to="/" tag="li" class="sidebar-item">
+          <router-link
+            to="/"
+            tag="li"
+            class="sidebar-item"
+            active-class="sidebar-item-active"
+            exact
+          >
             <span class="sidebar-item-icon glyphicon glyphicon-home"></span>
           </router-link>
-          <router-link to="/favorites" tag="li" class="sidebar-item">
+          <router-link
+            to="/favorites"
+            tag="li"
+            class="sidebar-item"
+            active-class="sidebar-item-active"
+          >
             <span class="sidebar-item-icon glyphicon glyphicon-heart"></span>
           </router-link>
         </ul>
@@ -24,16 +35,8 @@
 export default {
   name: "Sidebar",
   methods: {
-    toggleSidebar: function () {
-      const sdbar = document.getElementsByClassName("sidebar")[0];
-
-      if (!sdbar.style.transform) {
-        sdbar.style.transform = "translateX(0)";
-      } else {
-        sdbar.style.transform = "";
-      }
-
-      this.activated = !this.activated;
+    deactivateSidebar() {
+      this.$store.commit("deactivateSidebar");
     },
   },
 };
@@ -45,21 +48,30 @@ export default {
   left: 0;
   width: 10vw;
   height: 100vh;
-  max-width: 75px;
-  background-color: inherit;
+  max-width: 60px;
+  background-color: rgba(17, 17, 17, 0);
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 3;
-  transform: translateX(-100%);
   transition: 200ms ease all;
+}
+
+.sidebar:hover {
+  background-color: rgba(17, 17, 17, 1);
+}
+
+.deactivated {
+  transform: translateX(-100%);
 }
 
 .sidebar-header {
   height: 60px;
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  padding-left: 20px;
 }
 
 .sidebar-body {
@@ -90,11 +102,17 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
+  transition: 200ms ease all;
+}
+
+.sidebar-item-active {
+  color: white;
+  font-size: 25px;
 }
 
 .sidebar-item-icon {
-  font-size: 20px;
-  color: white;
+  color: inherit;
 }
 
 .sidebar-item a {
@@ -107,7 +125,8 @@ li {
 }
 
 .sidebar-item:hover {
-  background-color: #666666;
+  font-size: 25px;
+  color: white;
 }
 </style>
 

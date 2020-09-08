@@ -30,25 +30,23 @@
               v-if="movie.popularity"
             >{{"Popularidade: " + movie.popularity}}</div>
           </div>
-          <div class="movie-details">
+          <div class="movie-details" v-if="movie.budget || movie.revenue">
             <div
               class="movie-budget"
-              v-if="movie.budget !== null"
-            >{{"Orçamento: " + (mainProductionCountry.iso_3166_1 === "US" ? "U$ " : "R$ ") + movie.budget.toLocaleString("pt-BR")}}</div>
+              v-if="movie.budget"
+            >{{"Orçamento: " + (mainProductionCountry.iso_3166_1 === "US" ? "U$ " : "R$ ") + movie.budget.toLocaleString("pt-BR")+" "}}</div>
 
             <div class="separator" v-if="movie.revenue">{{" • "}}</div>
             <div
               class="movie-revenue"
               v-if="movie.revenue"
-            >{{"Receita: " + (mainProductionCountry.iso_3166_1 === "US" ? "U$ " : "R$ ") + movie.revenue.toLocaleString("pt-BR")}}</div>
+            >{{"Receita: " + (mainProductionCountry.iso_3166_1 === "US" ? "U$ " : "R$ ") + movie.revenue.toLocaleString("pt-BR")+" "}}</div>
           </div>
 
-          <div class="movie-details">
-            <div
-              class="movie-status"
-            >{{"Status: " + (movie.status === "Planned" ? "Em planejamento" : "Lançado")}}</div>
+          <div class="movie-details" v-if="status">
+            <div class="movie-status">{{"Status: " + status}}</div>
           </div>
-          <div class="movie-description" v-if="movie.overview">{{movie.overview}}</div>
+          <p class="movie-description" v-if="movie.overview">{{movie.overview}}</p>
           <div class="movie-rating">
             <div class="movie-rating-container">
               <span class="glyphicon glyphicon-star movie-rating-icon"></span>
@@ -59,25 +57,30 @@
             </div>
           </div>
         </div>
-        <button class="favorite-button">
-          <span />
+        <button class="favorite-button" @click="() => {isFavorite? unfavorite(): favorite()}">
+          <span
+            :class="{'fa': true, 'fa-heart favorited': isFavorite, 'fa fa-heart unfavorited': !isFavorite}"
+          ></span>
         </button>
       </div>
       <div class="movie-info-body">
         <Carousel title="Elenco" v-if="movie.cast">
           <CastItem v-for="(cast_p, key) in movie.cast" :key="key" :cast="cast_p" />
         </Carousel>
-        <Carousel title="Trailers" v-if="trailers.length > 0">
+
+        <Carousel title="Trailers" v-if="trailers">
           <VideoItem v-for="(trailer, key) in trailers" :key="key" :video="trailer" />
         </Carousel>
-        <Carousel title="Recomendados" v-if="recommendations.length > 0">
+
+        <Carousel title="Recomendados" v-if="recommendations">
           <RecommendationItem
             v-for="(recommendation, key) in recommendations"
             :key="key"
             :recommendation="recommendation"
           />
         </Carousel>
-        <Carousel title="Similares" v-if="similars.length > 0">
+
+        <Carousel title="Similares" v-if="similars">
           <RecommendationItem
             v-for="(similar, key) in similars"
             :key="key"
@@ -91,10 +94,16 @@
 </template>
 
 <script>
-import { getMovie } from "../../api-calls.js";
-import { getImageBaseUrl } from "../../api-config.js";
+import {
+  getMovie,
+  isFavorite,
+  favoriteMovie,
+  unfavoriteMovie,
+} from "@/api-calls.js";
+import { getImageBaseUrl } from "@/api-config.js";
+
+import Carousel from "@/components/Carousel.vue";
 import CastItem from "./components/CastItem.vue";
-import Carousel from "../../components/Carousel.vue";
 import VideoItem from "./components/VideoItem.vue";
 import RecommendationItem from "./components/RecommendationItem.vue";
 
@@ -109,7 +118,6 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      backImageUrl: "",
       movie: {
         budget: null,
         revenue: null,
@@ -117,7 +125,7 @@ export default {
         release_date: null,
         cast: null,
       },
-      mainProductionCountry: "",
+      isFavorite: isFavorite(this.id),
     };
   },
   computed: {
@@ -134,52 +142,68 @@ export default {
         (timeObj.hours > 0 ? timeObj.hours + "h" : "") + timeObj.minutes + "min"
       );
     },
+    status() {
+      if (this.movie.status === "Planned") return "Em planejamento";
+
+      return "Lançado";
+    },
+    mainProductionCountry() {
+      if (this.movie.production_countries)
+        return this.movie.production_countries[0];
+
+      return null;
+    },
+    backImageUrl() {
+      if (this.movie.backdrop_path) {
+        return getImageBaseUrl() + "original" + this.movie.backdrop_path;
+      } else if (this.movie.poster_path) {
+        return getImageBaseUrl() + "original" + this.movie.poster_path;
+      } else {
+        return "";
+      }
+    },
     trailers() {
-      return this.movie.videos
-        ? this.movie.videos.filter((video) => video.type === "Trailer")
-        : [];
+      if (this.movie.videos)
+        return this.movie.videos.filter((video) => video.type === "Trailer");
+
+      return null;
     },
     recommendations() {
-      return this.movie.recommendations ? this.movie.recommendations : [];
+      if (this.movie.recommendations) return this.movie.recommendations;
+
+      return null;
     },
     similars() {
-      return this.movie.similar ? this.movie.similar.results : [];
+      if (this.movie.similars) return this.movie.similars;
+
+      return null;
+    },
+  },
+  methods: {
+    favorite() {
+      favoriteMovie(this.id);
+      this.isFavorite = isFavorite(this.id);
+    },
+    unfavorite() {
+      unfavoriteMovie(this.id);
+      this.isFavorite = isFavorite(this.id);
     },
   },
   created() {
     getMovie(this.id).then((movie) => {
       this.movie = movie;
-
-      if (movie.backdrop_path) {
-        this.backImageUrl =
-          getImageBaseUrl() + "original" + movie.backdrop_path;
-      } else if (movie.poster_path) {
-        this.backImageUrl = getImageBaseUrl() + "original" + movie.poster_path;
-      } else {
-        this.backImageUrl = "";
-      }
     });
+    this.isFavorite = isFavorite(this.id);
   },
   watch: {
-    movie: function (newMovie) {
-      this.mainProductionCountry = newMovie.production_countries[0] || "";
-    },
-    $route: function () {
+    $route() {
       this.id = this.$route.params.id;
 
       getMovie(this.id).then((movie) => {
         this.movie = movie;
-        console.log(this.movie);
-        if (movie.backdrop_path) {
-          this.backImageUrl =
-            getImageBaseUrl() + "original" + movie.backdrop_path;
-        } else if (movie.poster_path) {
-          this.backImageUrl =
-            getImageBaseUrl() + "original" + movie.poster_path;
-        } else {
-          this.backImageUrl = "";
-        }
       });
+
+      this.isFavorite = isFavorite(this.id);
     },
   },
 };
