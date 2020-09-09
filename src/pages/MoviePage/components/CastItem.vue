@@ -56,6 +56,11 @@ export default {
 
 .cast-text {
   text-align: center;
+  font-size: 1.2rem;
+}
+
+.cast-name {
+  font-weight: bold;
 }
 
 .cast-character {

@@ -72,6 +72,7 @@ export default {
   cursor: pointer;
   position: relative;
   margin: 6px;
+  /* flex-grow: 2; */
 }
 
 .movie-content {
@@ -99,7 +100,7 @@ export default {
   justify-content: center;
   align-items: center;
   transition: 0.1s;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: white;
   z-index: 2;
   padding: 0;
@@ -118,6 +119,6 @@ export default {
   height: 55px;
   right: 7.5px;
   bottom: 22.5px;
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 </style>

@@ -32,7 +32,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  font-size: 12px;
+  font-size: 14px;
   overflow: hidden;
   color: #aaaaaa;
   background-color: #010101;

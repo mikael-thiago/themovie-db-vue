@@ -55,8 +55,6 @@ export default {
   },
   methods: {
     redirectToMovie() {
-      document.getElementsByClassName("movie-wrapper")[0].scrollTo(0, 0);
-
       this.$router.push(`/movie/${this.recommendation.id}`);
     },
     brightOnHover() {

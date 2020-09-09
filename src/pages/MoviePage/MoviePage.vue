@@ -58,9 +58,9 @@
           </div>
         </div>
         <button class="favorite-button" @click="() => {isFavorite? unfavorite(): favorite()}">
-          <span
-            :class="{'fa': true, 'fa-heart favorited': isFavorite, 'fa fa-heart unfavorited': !isFavorite}"
-          ></span>
+          <i
+            :class="{'fa-heart': true, 'fa favorited': isFavorite, 'far unfavorited': !isFavorite}"
+          ></i>
         </button>
       </div>
       <div class="movie-info-body">
@@ -163,8 +163,13 @@ export default {
       }
     },
     trailers() {
-      if (this.movie.videos)
-        return this.movie.videos.filter((video) => video.type === "Trailer");
+      if (this.movie.videos.length) {
+        const trailers = this.movie.videos.filter(
+          (video) => video.type === "Trailer"
+        );
+
+        if (trailers.length) return trailers;
+      }
 
       return null;
     },
@@ -192,8 +197,8 @@ export default {
   created() {
     getMovie(this.id).then((movie) => {
       this.movie = movie;
+      this.isFavorite = isFavorite(this.id);
     });
-    this.isFavorite = isFavorite(this.id);
   },
   watch: {
     $route() {
@@ -201,9 +206,9 @@ export default {
 
       getMovie(this.id).then((movie) => {
         this.movie = movie;
+        this.isFavorite = isFavorite(this.id);
+        document.getElementsByClassName("movie-wrapper")[0].scrollTo(0, 0);
       });
-
-      this.isFavorite = isFavorite(this.id);
     },
   },
 };
@@ -263,18 +268,18 @@ export default {
 }
 
 .movie-tagline {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .movie-details {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin: 10px 0;
   display: flex;
   align-items: center;
 }
 
 .movie-description {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin: 10px 0;
 }
 
@@ -287,7 +292,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   box-shadow: 2px 2px 3px black;
   margin-top: 20px;
 }
@@ -305,7 +310,7 @@ export default {
 }
 
 .movie-rating-vote-count {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   color: #dddddd;
 }
 
@@ -320,7 +325,7 @@ export default {
   position: absolute;
   bottom: 30px;
   right: 80px;
-  font-size: 3rem;
+  font-size: 3.5rem;
 }
 
 .favorited {

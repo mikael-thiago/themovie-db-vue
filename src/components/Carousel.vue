@@ -84,7 +84,7 @@ export default {
 .carousel-content {
   margin: 10px 0;
   width: 100%;
-  height: min-content;
+  height: max-content;
   min-height: 2.5rem;
   position: relative;
   display: flex;
@@ -99,12 +99,12 @@ export default {
   border: none;
   outline: none;
   font-size: 2.5rem;
-  transition: 0.2s;
+  transition: 0.2s ease all;
   opacity: 0.7;
 }
 
 .carousel-controller:hover {
-  font-size: 2.7rem;
+  font-size: 4rem;
   opacity: 1;
   color: white;
 }
